@@ -13,13 +13,13 @@ The methodology was evaluated using a simulation study. The three aims of the si
 
 The simulation study was performed for 24 scenarios. The simulation study focused on large sample properties, where a sample size of 10000 was used. As an exploratory analysis, a sample size of 200 was also investigated. Each scenario (including both sample sizes) was ran as a separate batch on the High Performance Computing cluster at the University of Leicester. 
 
-[`create_simulation_files.do`] (link) shows how the simulation _.do_ files were created. This was performed twice: once for the iteration sample size calculation (1000 repetitions) and once for the main simulation study (7700 repetitions). The file uses the [`simulation_template.do`] (link) to produce the 24 simulation _.do_ files (one for each scenario). An example is shown with [`simulation_s1.do`] for scenario 1 for the main simulation study.
+[`create_simulation_files.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/create_simulation_files.do) shows how the simulation _.do_ files were created. This was performed twice: once for the iteration sample size calculation (1000 repetitions) and once for the main simulation study (7700 repetitions). The file uses the [`simulation_template.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_template.do) to produce the 24 simulation _.do_ files (one for each scenario). An example is shown with [`simulation_s1.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_s1.do) for scenario 1 for the main simulation study.
 
-The results from the main simulation study can be accessed using [`estimates.dta`] (link). This dataset is produced in [`analyse_simulation_study.do`] (link). It involves merging the 24 datasets (one for each scenario) and removing the difficult entries discussed in Section 6 in the manuscript. The .csv version of this file is [`estimates.csv’] (link).
+The results from the main simulation study can be accessed using [`estimates.dta`] (link). This dataset is produced in [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do). It involves merging the 24 datasets (one for each scenario) and removing the difficult entries discussed in Section 6 in the manuscript. The .csv version of this file is [`estimates.csv`] (link).
 
-The dataset is transformed into wide format and then two further .csv files are created: [`estimates_s200.csv’] and [`estimates_s10000.csv’] for sample size 200 and 10000, respectively. These have a sufficiently small number of rows so that they can be viewed in Excel ([`estimates.csv’] (link) exceeds the Excel row limit).
+The dataset is transformed into wide format and then two further .csv files are created: [`estimates_s200.csv`] (link) and [`estimates_s10000.csv`] (link) for sample size 200 and 10000, respectively. These have a sufficiently small number of rows so that they can be viewed in Excel ([`estimates.csv`] (link) exceeds the Excel row limit).
 
-[`analyse_simulation_study.do`] (link) performs the simulation study analysis in Section 4.2 of the manuscript. This includes:
+[`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) performs the simulation study analysis in Section 4.2 of the manuscript. This includes:
 * Merging the simulation datasets
 * Removing the difficult entries discussed in Section 6
 * Exporting the dataset into .csv files
@@ -41,7 +41,7 @@ library(speff2trial)
 write.csv(ACTG175, file=”actg175.csv”, row.names=F)
 ```
 
-[`actg175_application.do`] (link) performs the analysis in Chapter 5 of the manuscript. This includes:
+[`actg175_application.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Application/actg175_application.do) performs the analysis in Chapter 5 of the manuscript. This includes:
 * Initial formatting of the data
 * Fitting the propensity score model and creating and investigating the weights
 * Checking the standardised differences of covariates before and after weighting
@@ -50,5 +50,5 @@ write.csv(ACTG175, file=”actg175.csv”, row.names=F)
 * Point estimation with and without weighting
 * Variance estimation for stabilised and unstabilised weights: robust, M-estimation and bootstrapping (M=500 and M=10000)
 
-### References
+#### References
 * Hammer SM, Katzenstein DA, Hughes MD, et al. A trial comparing nucleoside monotherapy with combination therapy in HIV-infected adults with CD4 cell counts from 200 to 500 per cubic millimeter. N Engl J Med. 1996;335(15):1081-1090.
