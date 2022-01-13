@@ -33,7 +33,7 @@ The dataset is transformed into wide format and then two further .csv files are 
 
 The methodology was illustrated with the AIDS Clinical Trial Group Study 175 (ACTG175) dataset. The randomised clinical trial compared monotherapy with zidovudine or didanosine with combination therapy with zidovudine and didanosine or zidovudine and zalcatbine in adults with HIV type I. For more information, please see Hammer et al. 
 
-The ACTG175 dataset can be obtained from the [speff2trial](https://CRAN.Rproject.org/package=speff2trial)  package in R and consists of 2139 individuals and 17 possible confounders. First, the dataset needs to be exported as a .csv file. This can be done in R with the following code:
+The ACTG175 dataset can be obtained from the [speff2trial](https://CRAN.R-project.org/package=speff2trial)  package in R and consists of 2139 individuals and 17 possible confounders. First, the dataset needs to be exported as a .csv file. This can be done in R with the following code:
 
 ```
 install.packages(“speff2trial”)
