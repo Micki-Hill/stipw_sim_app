@@ -3,9 +3,12 @@
 ***************************************** 
 
 * Note, macros have to be preceeded by \ 
+* Note that the failure time T* (from the mauscript) is denoted as t in the code 
+* and the event time T (from the manuscript) is denoted as y in the code. 
+* This is due to notation changes in the paper
 
-* Date: 13/12/2021
-* Version: v1.0
+* Date: 24/01/2022
+* Version: v1.1
 
 
 // Specify the details of the simulation study
