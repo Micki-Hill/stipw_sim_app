@@ -1,17 +1,23 @@
 * Aim: To analyse the results of the main simulation study as described in Section 4.2 in the manuscript
 
-* Date: 12/01/2022
-* Version: v1.0
+* Date: 28/01/2022
+* Version: v1.1
 
 * Steps performed:
 * 	1. Merge the simulation datasets
 * 	2. Remove the difficult entries discussed in Section 6
 *	3. Export the dataset into .csv files
-* 	4. Calculate the performance measures with MCSE
-* 	5. Check the MCSE is within the desired tolerance as discussed in Supplementary Material S1
-* 	6. Create an example table of the results as given in Supplementary Material S4
-* 	7. Create an example graph of the results as given in Section 4.2 (and Supplementary Material S3)
+*	4. Rebuild the estimates dataset
+* 	5. Calculate the performance measures with MCSE
+* 	6. Check the MCSE is within the desired tolerance as discussed in Supplementary Material S1
+* 	7. Create an example table of the results as given in Supplementary Material S4
+* 	8. Create an example graph of the results as given in Section 4.2 (and Supplementary Material S3)
 
+* Note that steps 1-3 are for reference. Steps 4-8 can be ran by the user, once they have
+* downloaded, unzipped and saved the 4 csv files from GitHub.
+
+
+/*
 
 *************************************
 *		Merge the datasets			*
@@ -68,26 +74,64 @@ save estimates, replace
 
 
 *************************************
-*		Export as csv file			*
+*		Export as csv files			*
 *************************************
 
-// This section exports the .dta file as a .csv file.
-// It also transforms the data into wide format and exports it as two .csv files (one for each sample size).
-// This is done so the .csv file can be opened in Excel (otherwise there are too many rows).
+// This section transforms the data into wide format and exports it as four .csv files (one for each gamma and sample size).
+// This is done so that the files are small enough to be uploaded onto GitHub.
 
-// Original data export
 use estimates, replace
-export delimited "estimates.csv", replace
 
-
-// Tranform the data and export as two files, one for each sample size 
 drop method weight																// methodn combines these
 reshape wide beta se error converged , ///
 	i(repno gamma prev eff cens samp estimand) j(methodn) 
 
 order repno gamma prev eff cens samp estimand aprev cens_int cens_adm ntrt1 ntrt0 nevent1 nevent0
-export delimited "estimates_200.csv" if samp == 200, replace
-export delimited "estimates_10000.csv" if samp == 10000, replace
+
+export delimited "estimates_g1_s200.csv" if samp == 200 & gamma == 1, replace
+export delimited "estimates_g2_s200.csv" if samp == 200 & gamma == 2, replace
+export delimited "estimates_g1_s10000.csv" if samp == 10000 & gamma == 1, replace
+export delimited "estimates_g2_s10000.csv" if samp == 10000 & gamma == 2, replace
+
+*/
+
+
+*************************************
+*		Rebuild estimates dataset	*
+*************************************
+
+// This section imports and rebuilds the estimates dataset for analysis.
+// Please download, unzip and save each of the 4 csv datasets from Github.
+
+// Import the csv files
+import delimited "estimates_g1_s200.csv", clear
+save estimates_g1_s200, replace
+
+import delimited "estimates_g2_s200.csv", clear
+save estimates_g2_s200, replace
+
+import delimited "estimates_g1_s10000.csv", clear
+save estimates_g1_s10000, replace
+
+import delimited "estimates_g2_s10000.csv", clear
+save estimates_g2_s10000, replace
+
+// Append the csv files
+use estimates_g1_s200, replace
+append using estimates_g2_s200 
+append using estimates_g1_s10000 
+append using estimates_g2_s10000
+
+// Reshape the csv files
+reshape long beta se error converged , ///
+	i(repno gamma prev eff cens samp estimand) j(methodn)
+qui label define methodn 1 "U: Robust" 2 "U: Boot" 3 "U: M-est" 4 "S: Robust" 5 "S: Boot" 6 "S: M-est"
+qui label values methodn methodn
+
+// Drop the estimates that had previously been removed (now they are just missing)
+drop if beta == .
+
+save estimates, replace
 
 		
 *************************************
