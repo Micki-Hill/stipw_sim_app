@@ -16,10 +16,10 @@ The simulation study was performed for 24 scenarios. The simulation study focuse
 [`create_simulation_files.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/create_simulation_files.do) shows how the simulation _.do_ files were created. This was performed twice: once for the iteration sample size calculation (1000 repetitions) and once for the main simulation study (7700 repetitions). The file uses the [`simulation_template.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_template.do) to produce the 24 simulation _.do_ files (one for each scenario). An example is shown with [`simulation_s1.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_s1.do) for scenario 1 for the main simulation study.
 
 The 24 datasets (one for each scenario) from the main simulation study are merged together in [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) and the difficult entries discussed in Section 6 in the manuscript are removed. The combined dataset is then transformed into wide format and split into four .csv files (split by sample size and gamma value). This was done so that the files were small enough to be uploaded onto GitHub. [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) includes code to rebuild the combined dataset. To do this, the user needs to download, unzip and save the following .csv files:
-* [`estimates_g1_s200.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s200.csv)
-* [`estimates_g2_s200.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s200.csv)
-* [`estimates_g1_s10000.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s10000.csv)
-* [`estimates_g2_s10000.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s10000.csv)
+* [`estimates_g1_s200.7z`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s200.7z)
+* [`estimates_g2_s200.7z`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s200.7z)
+* [`estimates_g1_s10000.7z`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s10000.7z)
+* [`estimates_g2_s10000.7z`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s10000.7z)
 
 [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) performs the simulation study analysis in Section 4.2 of the manuscript. This includes:
 * Merging the simulation datasets
