@@ -9,20 +9,23 @@ In the manuscript titled _Variance estimation in inverse probability weighted pa
 The methodology was evaluated using a simulation study. The three aims of the simulation study were:
 * To evaluate the performance of the M-estimation variance estimator (for both stabilised and unstabilised weights)
 * To compare whether stabilised or unstabilised weights result in a better M-estimation variance estimator
-* To compare the computational time of the M-0estumnation and bootstrap variance estimators
+* To compare the computational time of the M-estimation and bootstrap variance estimators
 
 The simulation study was performed for 24 scenarios. The simulation study focused on large sample properties, where a sample size of 10000 was used. As an exploratory analysis, a sample size of 200 was also investigated. Each scenario (including both sample sizes) was ran as a separate batch on the High Performance Computing cluster at the University of Leicester. 
 
 [`create_simulation_files.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/create_simulation_files.do) shows how the simulation _.do_ files were created. This was performed twice: once for the iteration sample size calculation (1000 repetitions) and once for the main simulation study (7700 repetitions). The file uses the [`simulation_template.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_template.do) to produce the 24 simulation _.do_ files (one for each scenario). An example is shown with [`simulation_s1.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/simulation_s1.do) for scenario 1 for the main simulation study.
 
-The results from the main simulation study can be accessed using [`estimates.dta`] (link). This dataset is produced in [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do). It involves merging the 24 datasets (one for each scenario) and removing the difficult entries discussed in Section 6 in the manuscript. The .csv version of this file is [`estimates.csv`] (link).
-
-The dataset is transformed into wide format and then two further .csv files are created: [`estimates_s200.csv`] (link) and [`estimates_s10000.csv`] (link) for sample size 200 and 10000, respectively. These have a sufficiently small number of rows so that they can be viewed in Excel ([`estimates.csv`] (link) exceeds the Excel row limit).
+The 24 datasets (one for each scenario) from the main simulation study are merged together in [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) and the difficult entries discussed in Section 6 in the manuscript are removed. The combined dataset is then transformed into wide format and split into four .csv files (split by sample size and gamma value). This was done so that the files were small enough to be uploaded onto GitHub. [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) includes code to rebuild the combined dataset. To do this, the user needs to download, unzip and save the following .csv files:
+* [`estimates_g1_s200.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s200.csv)
+* [`estimates_g2_s200.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s200.csv)
+* [`estimates_g1_s10000.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g1_s10000.csv)
+* [`estimates_g2_s10000.csv`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/estimates_g2_s10000.csv)
 
 [`analyse_simulation_study.do`](https://github.com/Micki-Hill/stipw_sim_app/blob/main/Simulation_study/analyse_simulation_study.do) performs the simulation study analysis in Section 4.2 of the manuscript. This includes:
 * Merging the simulation datasets
 * Removing the difficult entries discussed in Section 6
 * Exporting the dataset into .csv files
+* Rebuilding the combined dataset
 * Calculating the performance measures with MCSE
 * Checking the MCSE is within the desired tolerance as discussed in Supplementary Material S1
 * Creating an example table of the results as given in Supplementary Material S4
